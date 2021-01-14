@@ -849,27 +849,28 @@ func TestIcons(t *testing.T) {
 						assert.Equal(t, "spekemat", icon1.AltText)
 						assert.Equal(t, "kick it!", icon1.HoverText)
 
-						fallbackImages := icon1.IconClickFallbackImages
-						assert.Len(t, fallbackImages, 2)
-						assert.Equal(t, []IconClickFallbackImage{
-							{
-								Width: 69, Height: 69, AltText: "https://test.pl",
-								StaticResource: &StaticResource{
-									CreativeType: "image/png", URI: "https://test.pl/fallback_image.png",
+						fallbackImages := icon1.IconClicks.IconClickFallbackImages
+						assert.Len(t, fallbackImages.IconClickFallbackImage, 2)
+						assert.Equal(t, &IconClickFallbackImages{
+							[]IconClickFallbackImage{
+								{
+									Width: 69, Height: 69, AltText: "https://test.pl",
+									StaticResource: &StaticResource{
+										CreativeType: "image/png", URI: "https://test.pl/fallback_image.png",
+									},
 								},
-							},
-							{
-								Width: 71, Height: 71, AltText: "https://test.pl",
-								StaticResource: &StaticResource{
-									CreativeType: "image/png", URI: "https://test.pl/fallback_image.png",
+								{
+									Width: 71, Height: 71, AltText: "https://test.pl",
+									StaticResource: &StaticResource{
+										CreativeType: "image/png", URI: "https://test.pl/fallback_image.png",
+									},
 								},
-							},
-						}, fallbackImages)
+							}}, fallbackImages)
 
 						if assert.NotNil(t, icon1.StaticResource) {
 							assert.Equal(t, "image/png", icon1.StaticResource.CreativeType)
 							assert.Equal(t, "https://s.aolcdn.com/ads/adchoices.png", icon1.StaticResource.URI)
-							assert.Equal(t, "https://adinfo.aol.com", icon1.IconClickThrough.CDATA)
+							assert.Equal(t, "https://adinfo.aol.com", icon1.IconClicks.IconClickThrough.CDATA)
 						}
 					}
 				}

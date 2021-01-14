@@ -439,16 +439,29 @@ type Icon struct {
 	IFrameResource *CDATAString `xml:",omitempty" json:",omitempty"`
 	// URL to a static file, such as an image or SWF file
 	StaticResource *StaticResource `xml:",omitempty" json:",omitempty"`
-	// URL to open as destination page when user clicks on the icon.
-	IconClickThrough *CDATAString `xml:"IconClicks>IconClickThrough,omitempty" json:",omitempty"`
-	// URLs to ping when user clicks on the the icon.
-	IconClickTrackings []CDATAString `xml:"IconClicks>IconClickTracking,omitempty" json:",omitempty"`
-	// Provides information disclosure for platforms which do not support HTML rendering, by baking
-	// the information into an image
-	IconClickFallbackImages []IconClickFallbackImage `xml:"IconClicks>IconClickFallbackImages>IconClickFallbackImage,omitempty" json:",omitempty"`
+	// Container for IconClick events
+	IconClicks *IconClicks `xml:"IconClicks,omitempty" json:",omitempty"`
 	// A URI for the tracking resource file to be called when the icon creative is displayed.
 	IconViewTracking *CDATAString `xml:"IconViewTracking,omitempty" json:",omitempty"`
 }
+
+// IconClick contains IconClick events information
+type IconClicks struct {
+	// URL to open as destination page when user clicks on the icon.
+	IconClickThrough *CDATAString `xml:"IconClickThrough,omitempty" json:",omitempty"`
+	// URLs to ping when user clicks on the the icon.
+	IconClickTrackings []CDATAString `xml:"IconClickTracking,omitempty" json:",omitempty"`
+	// Provides information disclosure for platforms which do not support HTML rendering, by baking
+	// the information into an image
+	IconClickFallbackImages *IconClickFallbackImages `xml:"IconClickFallbackImages,omitempty" json:",omitempty"`
+}
+
+// IconClickFallbackImages contains IconClickFallbackImage information
+type IconClickFallbackImages struct {
+	// An array of IconClickFallbackImage
+	IconClickFallbackImage []IconClickFallbackImage `xml:"IconClickFallbackImage,omitempty" json:",omitempty"`
+}
+
 
 // IconClickFallbackImage element is used to display information when an icon click occurs
 type IconClickFallbackImage struct {
